@@ -4,3 +4,6 @@ private-files
 # Ignore any project files
 .idea
 .idea/*
+
+# Ignore custom files
+_ping.php
