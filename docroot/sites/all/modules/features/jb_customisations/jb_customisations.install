@@ -1,0 +1,14 @@
+<?php
+/**
+ * @file jb_customisations.install
+ */
+
+/**
+ * Add allowed values function for 'field_edit_content_types'.
+ */
+function jb_customisations_update_7001() {
+  $default_field = field_info_field('field_edit_content_types'); // machine name of field
+  unset($default_field['settings']['allowed_values']); // having this set interferes with the allowed_values_function value
+  $default_field['settings']['allowed_values_function'] = '_jb_customisations_field_content_types'; // function name that provides array of values
+  field_update_field($default_field);
+}

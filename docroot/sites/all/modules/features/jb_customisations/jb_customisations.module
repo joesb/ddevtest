@@ -1,0 +1,74 @@
+<?php
+/**
+ * @file
+ * Code for the Site Customisations feature.
+ */
+
+include_once 'jb_customisations.features.inc';
+/**
+ * @file jb_customisations.module
+ */
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function jb_customisations_entity_info_alter(&$entity_info) {
+  $entity_info['user']['view modes']['article_embed'] = array(
+    'label' => t('Article embed'),
+    'custom settings' => TRUE,
+  );
+}
+
+
+/**
+ * Implements hook_permission().
+ */
+function jb_customisations_permission() {
+  return array(
+    'view prepublished special articles' => array(
+      'title' => t('View prepbulished special articles'),
+      'description' => t('View special articles before their publish date.'),
+    )
+  );
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function jb_customisations_node_access($node, $op, $account) {
+  $type = is_string($node) ? $node : $node->type;
+  if ($type == 'article' && is_object($node) && $op == 'view') {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $special = $wrapper->field_special->value();
+    $special_date = $wrapper->field_publish_special_date->value();
+    $date = time();
+    if ($special && (($special_date > $date && user_access('view prepublished special articles', $account)) || ($special_date < $date))) {
+      return NODE_ACCESS_ALLOW;
+    }
+    return NODE_ACCESS_DENY;
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function jb_customisations_node_update($node) {
+  $article_wrapper = new \Drupal\jb_customisations\EntityWrapper\Node\NodeEditorWrapper($node);
+  $emails = $article_wrapper->emailEditors();
+  foreach ($emails as $message) {
+    drupal_set_message($message);
+  }
+}
+
+/**
+ * Custom function to return an array of node types suitable for a list field.
+ */
+function _jb_customisations_field_content_types() {
+  $allowed_values = array();
+  $node_types = node_type_get_types();
+  foreach ($node_types as $type) {
+    $allowed_values[$type->type] = $type->name;
+  }
+  return $allowed_values;
+}
