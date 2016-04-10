@@ -12,6 +12,13 @@
       </div>
       <div class="media-body">
         <h1><?php print $title; ?></h1>
+        <?php if (isset($content['field_subtitle'])): ?>
+          <h2><?php print render($content['field_subtitle']); ?></h2>
+        <?php endif; ?>
+        <div class="byline pull-left">
+          <h5><?php print render($author['name']); ?></h5>
+          <?php print render($author['embed']); ?>
+        </div>
         <?php print render($content['body']); ?>
       </div>
     </div>
