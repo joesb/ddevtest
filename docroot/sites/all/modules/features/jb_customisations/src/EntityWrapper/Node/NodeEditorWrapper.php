@@ -41,10 +41,11 @@ class NodeEditorWrapper extends EntityDrupalWrapper {
    *
    * @param array $some_args
    */
-  public function email($some_args) {
+  public function email($editor) {
     // Call something like drupal_mail() here;
     // Return messages from drupal_mail().
-    return t('Some magic happened');
+    $account = user_load($editor->uid);
+    return t('Some magic happened for @username.', array('@username' => $account->name));
   }
 
   /**
@@ -55,14 +56,19 @@ class NodeEditorWrapper extends EntityDrupalWrapper {
    */
   public function getNodeTypeEditors() {
     $bundle = $this->getBundle();
+    // Get UID of node author
+    $author_info = $this->getPropertyInfo('author');
+    $uid = $this->getPropertyValue('author', $author_info);
+    // Get all users marked as editors, except for node author
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'user')
+      ->propertyCondition('uid', $uid, '!=')
       ->fieldCondition('field_editor', 'value', 1)
       ->fieldCondition('field_edit_content_types', 'value', $bundle);
 
     $editors = $query->execute();
 
-    if ($editors['user']) {
+    if (isset($editors['user'])) {
       return $editors['user'];
     }
     return array();
