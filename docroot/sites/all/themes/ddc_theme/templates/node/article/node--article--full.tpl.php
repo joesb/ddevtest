@@ -18,6 +18,7 @@
         <div class="byline pull-left">
           <h5><?php print render($author['name']); ?></h5>
           <?php print render($author['embed']); ?>
+          <div class="date-published"><?php print $published_date; ?></div>
         </div>
         <?php print render($content['body']); ?>
       </div>
