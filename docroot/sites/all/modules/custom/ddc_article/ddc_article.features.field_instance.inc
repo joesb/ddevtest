@@ -22,14 +22,14 @@ function ddc_article_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'full' => array(
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -38,7 +38,7 @@ function ddc_article_field_default_field_instances() {
           'trim_length' => 400,
         ),
         'type' => 'text_trimmed',
-        'weight' => 0,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -57,7 +57,7 @@ function ddc_article_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => -4,
+      'weight' => 2,
     ),
   );
 
@@ -75,7 +75,7 @@ function ddc_article_field_default_field_instances() {
           'image_style' => 'large',
         ),
         'type' => 'image',
-        'weight' => -1,
+        'weight' => 0,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -85,7 +85,7 @@ function ddc_article_field_default_field_instances() {
           'image_style' => 'full',
         ),
         'type' => 'image',
-        'weight' => -1,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -95,7 +95,7 @@ function ddc_article_field_default_field_instances() {
           'image_style' => 'teaser',
         ),
         'type' => 'image',
-        'weight' => -1,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'node',
@@ -120,7 +120,7 @@ function ddc_article_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => -1,
+      'weight' => 4,
     ),
   );
 
@@ -136,21 +136,21 @@ function ddc_article_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 10,
+        'weight' => 3,
       ),
       'full' => array(
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 10,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 10,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -167,7 +167,7 @@ function ddc_article_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => -4,
+      'weight' => 3,
     ),
   );
 
