@@ -44,4 +44,5 @@ function ddc_theme_preprocess_node__article__full(&$variables) {
     'name' => l(filter_xss($author->name), 'user/' . $author->uid, array('attributes' => array('rel' => array('author')))),
     'embed' => user_view($author, 'article_embed'),
   );
+  $variables['published_date'] = format_date($node->created);
 }
